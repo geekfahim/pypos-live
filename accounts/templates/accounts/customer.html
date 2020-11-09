@@ -1,0 +1,70 @@
+{% extends 'accounts/main.html' %}
+
+{%block content%}
+
+   <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Customer</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content mt-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- Default box -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Customer</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+
+                <table class="table">
+                  <a href="{%url 'create_customer'%}" class="btn btn-primary btn-sm btn-block">Create Customer</a>
+                  <thead class="thead">
+                    <tr>
+                      <th scope="col">Customer</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                    {% for mcustomer in customers %}
+                      <tr>
+                        <td>{{mcustomer.name}}</td>
+                        <td>{{mcustomer.phone}}</td>
+                        <td>{{mcustomer.email}}</td>
+                        <td>
+                      		<a href="{% url 'customerpage' mcustomer.id %}" class="btn btn-sm btn-info"> <i class="fas fa-eye"></i></a>                        	
+                          <a href="{% url 'update_customer' mcustomer.id %}" class="btn btn-sm btn-info"> <i class="fas fa-edit"></i></a>                         
+                        </td>
+                      </tr>
+                    {%endfor%}
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table> 
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+
+
+
+  {%endblock%}

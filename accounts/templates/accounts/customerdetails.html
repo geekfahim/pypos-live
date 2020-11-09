@@ -1,0 +1,101 @@
+{%extends 'accounts/main.html'%}
+
+{%block title%}
+Customer
+{%endblock%}
+
+{%block content%}
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Customer</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+<section class="content">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Customer</h5>                    
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'update_customer' customer.id %}" class="btn btn-outline-primary btn-block">Update Customer</a>
+                    <a href="" class="btn btn-outline-success btn-block">Delete Customer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Customer Information</h5>                    
+                </div>
+                <div class="card-body">
+                    <p>Name: {{customer.name}}</p>
+                    <p>Phone: {{customer.phone}}</p>
+                    <p>Email: {{customer.email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Total Orders</h5>                    
+                </div>
+                <div class="card-body">
+                    <h1 style="padding: 10px; text-align: center;">{{total_order}}</h1>
+                </div>
+            </div>
+        </div>        
+    </div>    
+    <div class="product-table my-4">
+        <div class="row">
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Products</h5>                        
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Products</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Date Ordered</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for order in orders%}
+                                <tr>
+                                    <td>{{order.product.name}}</td>
+                                    <td>{{order.product.category}}</td>
+                                    <td>{{order.product.price}}</td>
+                                    <td>{{order.create_date}}</td>
+                                    <td>{{order.status}}</td>
+                                    <td>
+                                    <a href="{% url 'delete_order' order.id %}" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+    
+</section>
+{%endblock%}

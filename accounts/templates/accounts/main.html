@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{%block title%}{%endblock%}</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'theme/plugins/fontawesome-free/css/all.min.css'%}">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'theme/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'%}">
+  <link rel="stylesheet" href="{% static 'theme/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'%}">
+  <link rel="stylesheet" href="{% static 'theme/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'%}">  
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'theme/plugins/overlayScrollbars/css/OverlayScrollbars.min.css'%}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'theme/dist/css/adminlte.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer">
+<div class="wrapper">
+
+{%include 'accounts/navbar.html'%}
+
+  <!-- Main Sidebar Container -->
+
+{%include 'accounts/sidebar.html'%}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+        {%block content%}
+        {%endblock%}
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2020 <a href="https://geekfahim.com">PyPOS</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1
+    </div>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{% static 'theme/plugins/jquery/jquery.min.js'%}"></script>
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap -->
+<script src="{% static 'theme/plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- Datatable -->
+<script src="{% static 'theme/plugins/datatables/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'theme/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'%}"></script>
+<script src="{% static 'theme/plugins/datatables-responsive/js/dataTables.responsive.min.js'%}"></script>
+<script src="{% static 'theme/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'%}"></script>
+<script src="{% static 'theme/plugins/datatables-buttons/js/dataTables.buttons.min.js'%}"></script>
+
+
+<!-- overlayScrollbars -->
+<script src="{% static 'theme/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'theme/dist/js/adminlte.js'%}"></script>
+<script src="{% static 'theme/dist/js/demo.js'%}"></script>
+<script>
+/** add active class and stay opened when selected */
+var url = window.location;
+
+$('ul.nav-sidebar a').filter(function() {
+    return this.href == url;
+}).removeClass('active');
+
+// for sidebar menu entirely but not cover treeview
+$('ul.nav-sidebar a').filter(function() {
+    return this.href == url;
+}).addClass('active');
+
+
+// $('ul.nav-treeview a').filter(function() {
+//     return this.href == url;
+// }).parentsUntil(".nav-sidebar > .nav-treeview").removeClass('menu-open').prev('a').removeClass('active'); 
+// // for treeview
+// $('ul.nav-treeview a').filter(function() {
+//     return this.href == url;
+// }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');  
+</script>
+
+{%block js%}
+{%endblock%}
+</body>
+
+
+</html> 

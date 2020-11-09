@@ -1,0 +1,86 @@
+{% extends 'accounts/main.html' %}
+
+{% load static%}
+{% load widget_tweaks %}     
+
+{%block title%}
+	Product 
+{%endblock%}
+{%block content%}
+
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-body">			
+				<div class="card-title">
+					<h5>Add New Product</h5>
+				</div>
+			</div>
+			<div class="card card-body">			
+				<form action="" method="POST">
+						{% csrf_token %}
+					  
+				  <div class="form-row">
+				    <div class="form-group col-md-4">
+				      <label for="name">Product Name</label>
+							{{form.name|add_class:"form-control"}}
+				    </div>	
+				    <div class="form-group col-md-4">
+				      <label for="category">Category</label>
+							{{form.category|add_class:"form-control"}}
+				    </div>
+				    <div class="form-group col-md-4">
+				      <label for="category">Brand</label>
+							{{form.brand|add_class:"form-control"}}
+				    </div>				    
+				  </div>
+				  <div class="form-row">
+				    <div class="form-group col-md-4">
+				      <label for="price">Purchase Price</label>
+							{{form.purchase_price|add_class:"form-control"}}
+				    </div>	
+				    <div class="form-group col-md-4">
+				      <label for="price">Selling price</label>
+							{{form.selling_price|add_class:"form-control"}}
+				    </div>				    			    
+				  </div>
+				  <div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="quantity">Quantity(per pack)</label>
+							{{form.quantity|add_class:"form-control"}}
+				    </div>
+				    <div class="form-group col-md-6">
+				      <label for="perameter">Unit Perameter</label>
+							{{form.perameter|add_class:"form-control"}}
+				    </div>				    
+				  </div>
+
+				  <div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="total_quantity">Stock Quantity</label>
+							{{form.total_quantity|add_class:"form-control"}}
+				    </div>
+				  </div>				  	
+				  <div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="description">description</label>
+							{{form.description|add_class:"form-control"}}
+				    </div>
+				  </div>
+				  <div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="tag">tag</label>
+							{{form.tag|add_class:"form-control"}}
+				    </div>
+				  </div>				  				  			  				  			  			  
+					<input type="submit"  name="submit" class="btn btn-sm btn-primary">
+					
+				</form>
+
+			</div>
+		</div>
+	</div>	
+	
+</div>
+{%endblock%}

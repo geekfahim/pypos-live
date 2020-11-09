@@ -1,0 +1,52 @@
+{% extends 'accounts/main.html' %}
+
+{% load static%}
+{% load widget_tweaks %}
+{%block content%}
+
+<div class="container">
+<div class="row">
+	<div class="col-md-6 offset-md-2">
+		<div class="card card-body">			
+			<div class="card-title">
+				<h5>Customer</h5>
+			</div>
+			<form action="" method="POST">
+					{% csrf_token %}
+				  
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="customer">Customer</label>
+						{{form.customer|add_class:"form-control"}}
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="product">Product</label>
+						{{form.product|add_class:"form-control"}}
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="total">Total</label>
+						{{form.total|add_class:"form-control"}}
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="status">Status</label>
+						{{form.status|add_class:"form-control"}}
+			    </div>
+			  </div>			  			  			  
+				<input type="submit"  name="submit" class="btn btn-sm btn-primary">
+				
+			</form>
+
+		</div>
+	</div>
+</div>	
+	
+</div>
+
+
+{%endblock%}

@@ -1,0 +1,38 @@
+{% extends 'accounts/main.html' %}
+
+{% load static%}
+{% load widget_tweaks %}     
+
+{%block title%}
+	Category 
+{%endblock%}
+{%block content%}
+
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-body">			
+				<div class="card-title">
+					<h5>Add New Category</h5>
+				</div>
+			</div>
+			<div class="card card-body">			
+				<form action="" method="POST">
+						{% csrf_token %}
+					  
+				  <div class="form-row">
+				    <div class="form-group col-md-4">
+				      <label for="name">Category Name</label>
+							{{form.name|add_class:"form-control"}}
+				    </div>	 
+							{%render_field form.status class="form-control" %}  			  				 			  			  
+				   </div>
+					<input type="submit"  name="submit" class="btn btn-sm btn-primary">
+				</form>
+			</div>
+		</div>
+	</div>	
+	
+</div>
+{%endblock%}

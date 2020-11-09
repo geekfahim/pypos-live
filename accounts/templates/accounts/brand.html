@@ -1,0 +1,81 @@
+{%extends 'accounts/main.html' %}
+{%load static%}
+{%block title%}
+	brands
+{%endblock%}
+
+{%block content%}
+
+<br>
+<div class="container-fluid">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="">
+			<div class="card card-body">
+				<div class="card-title">
+					<h5 class="float-left">Brands</h5>	
+					<a href="{%url 'createbrand' %}" class="btn btn-sm btn-warning float-right">
+						<i class="far fa-plus-square"></i> Add New brand</a>					
+					{%if messages %}
+					{%for message in messages%}
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					  {{message}}
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>					
+					{% endfor %}
+					{% endif %}
+				</div>				
+			</div> 
+			<div class="card card-body">
+				<table id='brandTable' class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Action</th>
+            </tr>            
+          </thead>
+          <tbody>
+          {%for fbrand in brand %}
+                      <tr>
+                        <td>{{fbrand.id}}</td>
+                        <td>{{fbrand.name}}</td>
+                        <td>
+                          <a href="{% url 'updatebrand' fbrand.id %}" class="btn btn-sm btn-info"> <i class="fas fa-edit"></i></a>
+                          <a href="" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></a>
+                        </td>                                              
+                      </tr>
+          {%endfor%}            
+          </tbody>
+				</table>
+			
+			</div>
+		</div>
+	</div>
+</div>	
+</div>
+{%endblock%}
+
+{%block  js%}
+<script>
+  $(document).ready(function(){
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');    
+    $("#example1").DataTable();
+
+  });
+
+</script>
+  <script>
+      $(document).ready( function ()
+        {
+          $('#brandTable').DataTable();
+        } );
+    </script>
+
+{%endblock%}
