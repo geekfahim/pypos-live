@@ -12,7 +12,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block  text-center">{{user.username}}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -78,13 +78,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Brand</p>
                 </a>
-              </li>              
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tags</p>
-                </a>
-              </li>              
+              </li>                           
             </ul>
           </li>
           <li class="nav-item">
@@ -100,7 +94,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'expense' %}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
                <p>Expense</p>
             </a>

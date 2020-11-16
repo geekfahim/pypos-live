@@ -4,8 +4,9 @@ from django.db import models
 
 class Customer(models.Model):
 	name=models.CharField(max_length=200)
-	phone=models.CharField(max_length=200,null=True)
+	phone=models.CharField(max_length=200,null=True,unique=True)
 	email=models.CharField(max_length=200,null=True)
+	address=models.CharField(max_length=200,null=True)
 	create_date=models.DateTimeField(auto_now_add=True,null=True)
 
 	def __str__(self):
@@ -77,6 +78,7 @@ class Order(models.Model):
 class Expense(models.Model):
 	name=models.CharField(max_length=200)
 	amount=models.IntegerField(null=False,default=0)
+	create_date=models.DateTimeField(auto_now_add=True,null=True)
 
 class AppConfig(models.Model):
 	app_name=models.CharField(max_length=200,default='pypos',null=True,unique=True)

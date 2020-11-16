@@ -4,7 +4,7 @@
 {% load widget_tweaks %}     
 
 {%block title%}
-	App Settings 
+	Expense 
 {%endblock%}
 {%block content%}
 
@@ -24,7 +24,7 @@
 			{% endif %}	
 			<div class="card card-body">			
 				<div class="card-title">
-					<h5>App Settings</h5>
+					<h5>Add New Expense</h5>
 				</div>			
 			</div>			
 			<div class="card card-body">			
@@ -32,25 +32,14 @@
 				{% csrf_token %}					  
 				<div class="form-row">
 				    <div class="form-group col-md-4">
-				      <label for="name">App Name</label>
-						{{form.app_name|add_class:"form-control"}}
-					</div>
-				    <div class="form-group col-md-4">						
-				      <label for="name">Phone</label>						
-						{{form.phone|add_class:"form-control"}}
-					</div>
+				      <label for="name">Expense Name</label>
+						{{form.name|add_class:"form-control"}}
+				    </div>			  				  			  				  			  			  
+				</div>
+				<div class="form-row">
 				    <div class="form-group col-md-4">
-				      <label for="name">Address</label>						
-						{{form.address|add_class:"form-control"}}
-					</div>
-				    <div class="form-group col-md-4">
-				      <label for="name">Currency</label>						
-						{{form.currency|add_class:"form-control"}}
-					</div>
-				    <div class="form-group col-md-4">
-				      <label for="name">Invoice Terms</label>				    	
-						{{form.invoice_terms|add_class:"form-control"}}
-					</div>						
+				      <label for="name">Amount</label>
+						{{form.amount|add_class:"form-control"}}
 				    </div>			  				  			  				  			  			  
 				</div>
 				<!-- {{form.name.errors}} -->

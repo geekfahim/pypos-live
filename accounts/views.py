@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
+from django.core import serializers
+from django.http import JsonResponse
+
 from django.http import HttpResponse
+from django.db.models import Avg, Count, Min, Sum
 from django.contrib import messages
 from .models import*
 from .forms import*
@@ -95,7 +99,7 @@ def products(request):
 	context={'products':products}
 	return render(request,'accounts/products.html', context)
 
-def CreateProduct(request):
+def createProduct(request):
 	form = ProductForm()
 	if request.method=='POST':
 		form = ProductForm(request.POST)
@@ -105,7 +109,7 @@ def CreateProduct(request):
 	context={'form':form}		
 	return render(request,'accounts/product_form.html',context)
 
-def UpdateProduct(request,pk):
+def updateProduct(request,pk):
 	product = Product.objects.get(id=pk)
 	form = ProductForm(instance=product)
 	if request.method=="POST":
@@ -123,14 +127,46 @@ def customers(request):
 	return render(request,'accounts/customer.html',context)
 
 
-def CustomerPage(request,pk):
+def customerPage(request,pk):
 	customer = Customer.objects.get(id=pk)
 	orders = customer.order_set.all()
 	total_order = orders.count()
 	context = {'customer':customer,'orders':orders,'total_order':total_order}
 	return render(request,'accounts/customerdetails.html',context)
 
-def CreateCustomer(request):
+def customerAj(request):
+	if request.is_ajax and request.method=="POST":
+		name=request.POST['name']
+		phone=request.POST['phone']
+		email=request.POST['email']
+		address=request.POST['address']
+
+		Customer.objects.create(
+			name=name,
+			phone=phone,
+			email=email,
+			address=address
+		)
+	return HttpResponse('oks')	
+    # # request should be ajax and method should be POST.
+    # if request.is_ajax and request.method == "POST":
+    #     # get the form data
+    #     form = CustomerForm(request.POST)
+    #     # save the data and after fetch the object in instance
+    #     if form.is_valid():
+    #         instance = form.save()
+    #         # serialize in new friend object in json
+    #         ser_instance = serializers.serialize('json', [ instance, ])
+    #         # send to client side.
+    #         return JsonResponse({"instance": ser_instance}, status=200)
+    #     else:
+    #         # some form errors occured.
+    #         return JsonResponse({"error": form.errors}, status=400)
+
+    # # some error occured
+    # return JsonResponse({"error": ""}, status=400)
+
+def createCustomer(request):
 	form = CustomerForm()
 	if request.method == 'POST':
 		# print('saa'request.POST)
@@ -142,7 +178,7 @@ def CreateCustomer(request):
 	return render(request,'accounts/customer_form.html',context)
 
 
-def UpdateCustomer(request,pk):
+def updateCustomer(request,pk):
 	customer = Customer.objects.get(id=pk)
 	form = CustomerForm(instance=customer)
 	if request.method =='POST':
@@ -161,7 +197,7 @@ def createOrder(request):
 			form = OrderForm(request.POST)
 			if form.is_valid():
 				form.save()
-				return redirect('/')
+				return redirect('order')
 
 		context={'form':form}
 		return render(request,'accounts/order_form.html',context)	
@@ -192,16 +228,39 @@ def deleteOrder(request,pk):
 
 
 def expense(request):
+	currency=AppConfig.objects.all()
 	expense=Expense.objects.all()
-	context={'expense':expense}
+	context={'expense':expense,'currency':currency}
 	return render(request,'accounts/expense.html',context)
 
-
-def appConfig(request):
-	appconfig=AppConfig.objects.all()
-	form=AppConfigForm(instance=appconfig)
+def createExpense(request):
+	form=ExpenseForm()
 	if request.method=='POST':
-		form = AppConfigForm(request.POST,instance=appconfig)
+		form=ExpenseForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('expense')
+	context={'form':form}			
+	return render(request,'accounts/expense_form.html',context)
+
+
+def updateExpense(request,pk):
+	expense=Expense.objects.get(id=pk)
+	form=ExpenseForm(instance=expense)
+	if request.method=='POST':
+		form=ExpenseForm(request.POST,instance=expense)
+		if form.is_valid():
+			form.save()
+			return redirect('expense')
+	context={'form':form}
+	return render(request,'accounts/expense_form.html',context)			
+
+
+def appConfigUpdate(request,pk):
+	appconfig=AppConfig.objects.filter(app_name=pk)	
+	form=AppConfigForm()
+	if request.method=='POST':
+		form = AppConfigForm(request.POST)
 		if form.is_valid():
 			form.save()
 			return redirect('accounts/settings')

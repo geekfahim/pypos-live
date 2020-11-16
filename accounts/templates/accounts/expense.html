@@ -1,7 +1,7 @@
 {%extends 'accounts/main.html' %}
 {%load static%}
 {%block title%}
-	expense
+	Expense
 {%endblock%}
 
 {%block content%}
@@ -14,33 +14,37 @@
 		<div class="">
 			<div class="card card-body">
 				<div class="card-title">
-					<h5 class="float-left">expense</h5>	
+					<h5 class="float-left">Expense</h5>	
 					<a href="{%url 'createexpense' %}" class="btn btn-sm btn-warning float-right">
 						<i class="far fa-plus-square"></i> Add New Product</a>					
-				</div>				
+        </div>				
 			</div> 
+      <div class="p-3 mb-2 bg-gradient-warning text-white text-center">
+          <h3>Total Expense <strong class="total_expense"></strong></h3>        
+      </div>    
 			<div class="card card-body">
 				<table id='expenseTable' class="table">
           <thead>
             <tr>
-              <th>expense</th>
-              <th>Status</th>
+              <th>Date</th>
+              <th>Expense</th>
+              <th>Amount</th>
               <th>Action</th>
             </tr>            
           </thead>
           <tbody>
           	{%for iexpense in expense%}
                       <tr>
+                        <td>{{iexpense.create_date|date}}</td>
                         <td>{{iexpense.name}}</td>
-                        <td>
-                        	{{iexpense.status}}
-                        </td>
+                        <td class="expense">
+                         {{iexpense.amount}}</td>         	
                         <td>
                           <a href="{%url 'updateexpense' iexpense.id %}" class="btn btn-sm btn-info"> <i class="fas fa-edit"></i></a>
                           <a href="" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></a>
                         </td>                                              
                       </tr>
-            {%endfor%}          	
+            {%endfor%}            
           </tbody>
 				</table>
 			
@@ -53,10 +57,22 @@
 
 {%block  js%}
   <script>
+      $(document).ready(function(){
+        var expense;
+        var total_expense=0;
+        $('.expense').each(function(){
+        expense=$(this).html();
+        total_expense+=parseInt(expense);
+        $('.total_expense').text(total_expense);
+        });
+
+      });
+
       $(document).ready( function ()
         {
           $('#expenseTable').DataTable();
         } );
     </script>
+
 
 {%endblock%}

@@ -16,14 +16,19 @@
   <link rel="stylesheet" href="{% static 'theme/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'%}">
   <link rel="stylesheet" href="{% static 'theme/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'%}">
   <link rel="stylesheet" href="{% static 'theme/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'%}">  
+
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{% static 'theme/plugins/overlayScrollbars/css/OverlayScrollbars.min.css'%}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'theme/dist/css/adminlte.min.css'%}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{% static 'theme/plugins/select2/css/select2.min.css'%}">
+  <link rel="stylesheet" href="{% static 'theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'%}">
+  <!-- Select2 -->  
   <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
 
 {%include 'accounts/navbar.html'%}
@@ -46,7 +51,7 @@
 
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <footer class="main-footer my-4">
     <strong>Copyright &copy; 2020 <a href="https://geekfahim.com">PyPOS</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
@@ -59,7 +64,7 @@
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{% static 'theme/plugins/jquery/jquery.min.js'%}"></script>
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- <script src="plugins/jquery-ui/jquery-ui.min.js"></script> -->
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -73,6 +78,9 @@
 <script src="{% static 'theme/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'%}"></script>
 <script src="{% static 'theme/plugins/datatables-buttons/js/dataTables.buttons.min.js'%}"></script>
 
+<!-- Select2 -->
+<script src="{% static 'theme/plugins/select2/js/select2.min.js'%}"></script>
+<!-- select2 end-->
 
 <!-- overlayScrollbars -->
 <script src="{% static 'theme/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'%}"></script>

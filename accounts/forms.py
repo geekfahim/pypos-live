@@ -38,6 +38,10 @@ class BrandForm(ModelForm):
 				if instance.name==name:
 					raise forms.ValidationError(name,'Already Exists')
 			return name 
+class ExpenseForm(ModelForm):
+	class Meta:
+		model=Expense
+		fields='__all__'
 
 class AppConfigForm(ModelForm):
 	class Meta:

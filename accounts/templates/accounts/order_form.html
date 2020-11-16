@@ -1,52 +1,229 @@
 {% extends 'accounts/main.html' %}
 
 {% load static%}
-{% load widget_tweaks %}
+{% load widget_tweaks %}     
+
+{%block title%}
+	Create Order 
+{%endblock%}
 {%block content%}
 
-<div class="container">
-<div class="row">
-	<div class="col-md-6 offset-md-2">
-		<div class="card card-body">			
-			<div class="card-title">
-				<h5>Customer</h5>
-			</div>
+<br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">			
+			{%if messages %}
+			{%for message in messages%}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  {{form.name.value|title}} {{message}}
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>					
+			{% endfor %}
+			{% endif %}	
+			<div class="card card-body">			
+				<div class="card-title">
+					<h5>Create New Order</h5>
+				</div>			
+			</div>	
+		</div>
+	</div>	
 			<form action="" method="POST">
-					{% csrf_token %}
-				  
-			  <div class="form-row">
-			    <div class="form-group col-md-6">
-			      <label for="customer">Customer</label>
-						{{form.customer|add_class:"form-control"}}
-			    </div>
-			  </div>
-			  <div class="form-row">
-			    <div class="form-group col-md-6">
-			      <label for="product">Product</label>
-						{{form.product|add_class:"form-control"}}
-			    </div>
-			  </div>
-			  <div class="form-row">
-			    <div class="form-group col-md-6">
-			      <label for="total">Total</label>
-						{{form.total|add_class:"form-control"}}
-			    </div>
-			  </div>
-			  <div class="form-row">
-			    <div class="form-group col-md-6">
-			      <label for="status">Status</label>
-						{{form.status|add_class:"form-control"}}
-			    </div>
-			  </div>			  			  			  
-				<input type="submit"  name="submit" class="btn btn-sm btn-primary">
-				
+				<div class="row">		
+					<div class="col-md-8">			
+						<div class="card card-body">			
+							{% csrf_token %}					  
+							<div class="form-row">
+							    <div class="form-group col-md-4">
+							      <label for="name">Product</label>
+									<!-- {{form.product|add_class:"form-control select2bs4"}} -->
+									{% render_field form.product|add_class:"form-control select2bs4" id='productdropdown' %}
+
+							    </div>	
+							</div>
+						
+							<!-- {{form.name.errors}} -->
+						</div>
+						<div class="card card-body">
+						<table id='productTable' class="table table-striped table-bordered">
+					          <thead>
+					            <tr>
+					              <th>Products</th>
+					              <th>Category</th>
+					              <th>Brand</th>
+					              <th>Qty</th>
+					              <th>Purchase Price</th>
+					              <th>Selling Price</th>
+					              <th>Tags</th>
+					              <th>Action</th>
+					            </tr>            
+					          </thead>
+					          <tbody>
+					          	<tr>
+					          		<td></td>
+					          	</tr>
+					          </tbody>	
+					    </table>      						
+						</div>	
+					</div>
+					<div class="col-md-4">
+							<div class="card card-body">
+							<button type="button" class="btn btn-lg w-100 btn-gradient-warning my-2" data-toggle="modal" data-target="#customerModal"><i class="fas fa-plus"></i>
+							Add Customer</button>				
+
+							    <div class="form-group col-md-12">
+							      <label for="name">Customer</label>
+									<!-- {{form.customer|add_class:"form-control select2bs4"}} -->
+									<select name="customer"  class="custom-select select2bs4" id="customerdropdown">
+										
+									</select>
+							    </div>					    		  				  			  				
+							    <div class="form-group col-md-12">
+							      <label for="name">Discount</label>
+									{{form.discount|add_class:"form-control"}}
+							    </div>	
+							    <div class="form-group col-md-12">
+							      <label for="name">Total</label>
+									{{form.total |add_class:"form-control"}}
+							    </div>	
+							    <div class="form-group col-md-12">
+							      <label for="name">paid</label>
+									{{form.paid |add_class:"form-control"}}
+							    </div>	
+							    <div class="form-group col-md-12">
+							      <label for="name">due</label>
+									{{form.due |add_class:"form-control"}}
+							    </div>					    				    					
+						</div>
+						<button type="submit"  name="submit" class="btn btn-lg w-100 btn-gradient-primary">
+							Submit
+						</button>
+					</div>
+				</div>
 			</form>
 
-		</div>
-	</div>
-</div>	
-	
-</div>
+			<div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="customerModalLabel">Customer</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form action="" id="customerForm" method="POST">
+			        	{%csrf_token%}
+			          <div class="form-group">
+			            <label for="name" class="col-form-label">Customer Name</label>
+			            <input type="text" class="form-control" name="name" id="name" required="required">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">Phone</label>
+			            <input type="text" class="form-control" id="phone" name="phone">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">Email</label>
+			            <input type="text" name="email" class="form-control" id="email">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">Address</label>
+			            <input type="text" name="address" class="form-control" id="address">
+			          </div>			          					          							          
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <button type="submit" class="btn btn-primary">Submit</button>	
+				      </div>
+			      	</form>
 
+			      </div>
+			    </div>
+			  </div>
+			</div>	
+</div>
+{%endblock%}
+
+
+{%block js%}
+<script>
+  $(document).ready(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });	
+   }); 
+  $(document).on('change','#productdropdown',function(){
+  	// alert()
+  });
+</script>
+
+<script>
+  	customerLoad();
+  $(document).on('submit','#customerForm',function(e){
+  	e.preventDefault();
+  	let form =$(this).serialize();
+  	// console.log(form);
+  	$.ajax({
+  		type:'POST',  		
+  		url:'{% url "customerAjx" %}',
+  		dataType:'json',
+  		data:form,
+	    success: function (data) {
+	     $('#customerModal').modal('toggle');
+	     $('#customerForm').trigger('reset');	
+	       // console.log(data);
+	       alert('Addes successfully');
+	       customerLoad();
+	    },
+	    error: function (err) {
+	        console.log(err.responseText);
+	        alert("Something Went wrong, Please check & Try again...");
+	    }  		
+
+  	})
+
+});
+
+function customerLoad(){
+	alert();
+	$.ajax({
+		alert();
+		type:'GET',
+		url:'{% url "customerAjx" %}'
+		dataType:'json',
+		success:function(data){
+
+        $('#customerdropdown').empty();
+        $('#customerdropdown').append('<option selected value="" disabled>Select a Customer</option>');
+        $.each(response, function (i, customer) {
+            let namePhone = customer.name;
+            if (customer.phone) {
+                namePhone += ` (${customer.phone})`;
+            }
+            $('#customerdropdown').append($('<option>', {
+                value: customer.id,
+                text: namePhone
+            }));
+        });
+
+
+
+
+
+
+
+		},
+	    error: function (err) {
+	        console.log(err.responseText);
+	        alert("Something Went wrong, Please check & Try again...");
+	    } 
+	});
+}
+
+</script>
 
 {%endblock%}
