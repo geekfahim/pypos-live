@@ -1,5 +1,3 @@
-import django_heroku
-
 """
 Django settings for crmpy project.
 
@@ -142,5 +140,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
