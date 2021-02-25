@@ -11,7 +11,7 @@ from .forms import*
 
 
 # Create your views here.
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -24,7 +24,7 @@ def home(request):
 
     return render(request,'accounts/dashboard.html',context)
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def category(request):
     category = Category.objects.all()
     context={'category':category}
