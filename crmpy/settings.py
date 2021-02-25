@@ -26,7 +26,7 @@ SECRET_KEY = 'z@wl&cj6ytk%3p!kqfsoclvmsdmo3%r3ip9as!v^b_o8+=j%k7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ['ipypos.herokuapp.com']
+ALLOWED_HOSTS = ['ipypos.herokuapp.com']
 
 
 # Application definition
@@ -153,10 +153,6 @@ if os.getcwd() == '/app':
     DATABASES['default'].update(db_from_env)
     #Honor the 'X-forwarded-Proto' header for request.is_secure().
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    #Allow all host headers
-    ALLOWED_HOSTS = ['ipypos.herokuapp.com']
-    DEBUG = True
 
     #Static asset configuration
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
