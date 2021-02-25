@@ -1,0 +1,72 @@
+body{
+    background-color:#f1f1f1;
+}
+.logo{
+    width: 50px;
+}
+.main-footer{
+	margin-top: 50px;
+}
+.btn-gradient-primary {background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5  51%, #00d2ff  100%)}
+.btn-gradient-primary {
+/*margin: 10px;
+padding: 15px 45px;*/
+text-align: center;
+text-transform: uppercase;
+transition: 0.5s;
+background-size: 200% auto;
+color: white;            
+box-shadow: 0 0 20px #eee;
+border-radius: 10px;
+display: block;
+font-weight:bold;
+}
+
+.btn-gradient-primary:hover {
+background-position: right center; /* change the direction of the change here */
+color: #fff;
+text-decoration: none;
+}
+
+.btn-gradient-warning {background-image: linear-gradient(to right, #F09819 0%, #EDDE5D  51%, #F09819  100%)}
+.btn-gradient-warning {
+/*margin: 10px;*/
+/*padding: 15px 25px;*/
+text-align: center;
+text-transform: uppercase;
+transition: 0.5s;
+background-size: 200% auto;
+color: white;            
+box-shadow: 0 0 20px #eee;
+/*border-radius: 10px;*/
+display: block;
+font-weight:bold;
+}
+
+.btn-gradient-warning:hover {
+background-position: right center; /* change the direction of the change here */
+color: #fff;
+text-decoration: none;
+}
+
+.btn-gradient-danger {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+.btn-gradient-danger {
+/*margin: 10px;
+padding: 15px 45px;*/
+text-align: justify-all;
+text-transform: uppercase;
+transition: 0.5s;
+background-size: 200% auto;
+color: white;            
+box-shadow: 0 0 20px #eee;
+border-radius: 10px;
+display: block;
+font-weight:bold;
+}
+
+.btn-gradient-danger:hover {
+background-position: right center; /* change the direction of the change here */
+color: #fff;
+text-decoration: none;
+}
+         
