@@ -75,6 +75,7 @@ class Order(models.Model):
 		return self.product.name
 
 
+
 class Expense(models.Model):
 	name=models.CharField(max_length=200)
 	amount=models.IntegerField(null=False,default=0)

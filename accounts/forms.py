@@ -15,6 +15,13 @@ class CustomerForm(ModelForm):
 		model = Customer
 		fields = '__all__'
 
+		def clean_customer_phone(self):
+			phone = self.cleaned_data.get('phone')
+			for instance in Customer.object.all():
+				if instance.phone==phone:
+					raise forms.ValidationError(phone,'Already Exists')
+
+
 class CategoryForm(ModelForm):
 	class Meta:
 		model = Category 

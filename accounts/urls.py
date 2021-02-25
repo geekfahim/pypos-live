@@ -4,6 +4,10 @@ from . import views
 urlpatterns = [
     path('', views.home,name='home'),
     
+    # Auth
+    path('login',views.loginPage,name='login'),
+    path('logout',views.logoutPage,name='logout'),
+
     # products
     path('products/', views.products,name='products'),
     path('create-product/',views.createProduct,name='create_product'),
@@ -18,10 +22,11 @@ urlpatterns = [
 
     
     # customer
+    # path('customer-load/',views.customerLoad,name='customerload'),
     path('customer-Aj/',views.customerAj,name='customerAjx'),
     
     path('customer/',views.customers,name='customer'),
-
+    # Customer detail page
     path('customer/<str:pk>/', views.customerPage,name='customerpage'),
     path('create-customer/',views.createCustomer,name='create_customer'),
     path('update-customer/<str:pk>',views.updateCustomer,name='update_customer'),

@@ -15,8 +15,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="logout" href="#" role="button">
-          <i class="fas fa-power-off"></i>
+        <a class="nav-link" data-widget="logout" href="{% url 'logout' %}" role="button">
+          {{request.user}} <i class="fas fa-power-off"></i>
         </a>
       </li>      
     </ul>

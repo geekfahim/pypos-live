@@ -12,16 +12,6 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">			
-			{%if messages %}
-			{%for message in messages%}
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-			  {{form.name.value|title}} {{message}}
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			  </button>
-			</div>					
-			{% endfor %}
-			{% endif %}	
 			<div class="card card-body">			
 				<div class="card-title">
 					<h5>Create New Order</h5>
@@ -39,8 +29,10 @@
 							      <label for="name">Product</label>
 									<!-- {{form.product|add_class:"form-control select2bs4"}} -->
 									{% render_field form.product|add_class:"form-control select2bs4" id='productdropdown' %}
-
-							    </div>	
+							    </div>
+								{% for product in order.product.all %}
+								     {{ product.selling_price }}
+								{% endfor %}							    
 							</div>
 						
 							<!-- {{form.name.errors}} -->
@@ -53,9 +45,7 @@
 					              <th>Category</th>
 					              <th>Brand</th>
 					              <th>Qty</th>
-					              <th>Purchase Price</th>
 					              <th>Selling Price</th>
-					              <th>Tags</th>
 					              <th>Action</th>
 					            </tr>            
 					          </thead>
@@ -71,10 +61,8 @@
 							<div class="card card-body">
 							<button type="button" class="btn btn-lg w-100 btn-gradient-warning my-2" data-toggle="modal" data-target="#customerModal"><i class="fas fa-plus"></i>
 							Add Customer</button>				
-
 							    <div class="form-group col-md-12">
 							      <label for="name">Customer</label>
-									<!-- {{form.customer|add_class:"form-control select2bs4"}} -->
 									<select name="customer"  class="custom-select select2bs4" id="customerdropdown">
 										
 									</select>
@@ -156,13 +144,13 @@
       theme: 'bootstrap4'
     });	
    }); 
-  $(document).on('change','#productdropdown',function(){
-  	// alert()
-  });
+  // $(document).on('change','#productdropdown',function(){
+  // 	    alert($(this).val());
+  // });
 </script>
 
 <script>
-  	customerLoad();
+  customerLoad();	
   $(document).on('submit','#customerForm',function(e){
   	e.preventDefault();
   	let form =$(this).serialize();
@@ -176,54 +164,48 @@
 	     $('#customerModal').modal('toggle');
 	     $('#customerForm').trigger('reset');	
 	       // console.log(data);
-	       alert('Addes successfully');
-	       customerLoad();
+	       alert('Added successfully');
+	       customerLoad();	      
 	    },
-	    error: function (err) {
-	        console.log(err.responseText);
-	        alert("Something Went wrong, Please check & Try again...");
+	    error: function (data) {
+	       // console.log(data.responseText);        
+	       alert(data.responseText.toString());        
+
 	    }  		
 
   	})
 
 });
-
 function customerLoad(){
-	alert();
-	$.ajax({
-		alert();
-		type:'GET',
-		url:'{% url "customerAjx" %}'
-		dataType:'json',
-		success:function(data){
-
+$.ajax({
+    url: '{% url "customerAjx" %}',
+    type: 'GET',
+    dataType:'json',
+    success: function (response) {
         $('#customerdropdown').empty();
         $('#customerdropdown').append('<option selected value="" disabled>Select a Customer</option>');
-        $.each(response, function (i, customer) {
-            let namePhone = customer.name;
-            if (customer.phone) {
-                namePhone += ` (${customer.phone})`;
-            }
-            $('#customerdropdown').append($('<option>', {
-                value: customer.id,
-                text: namePhone
-            }));
-        });
+        data = response;
+        // console.log(data);
+            $.each(response, function (id,customer) {
+                let namePhone = customer.name;
+                if (customer.phone) {
+                    namePhone += `(${customer.phone})`;
+                }
+                $('#customerdropdown').append($('<option>', {
+                    value: customer.id,
+                    text: namePhone
+                }));
+            });        
+        // alert('getting ajx');
 
+    },
+    error: function (err) {
+        console.log(err.responseText);
+        alert("Something Went wrong, Please check & Try again...");
+    }
 
-
-
-
-
-
-		},
-	    error: function (err) {
-	        console.log(err.responseText);
-	        alert("Something Went wrong, Please check & Try again...");
-	    } 
-	});
-}
-
+});
+};
 </script>
 
 {%endblock%}

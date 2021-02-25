@@ -32,7 +32,7 @@
               </div>
               <div class="card-body">
 
-                <table class="table">
+                <table class="table" id="customerTable">
                   <a href="{%url 'create_customer'%}" class="btn btn-primary btn-sm btn-block">Create Customer</a>
                   <thead class="thead">
                     <tr>
@@ -41,19 +41,19 @@
                       <th scope="col">Email</th>
                       <th scope="col">Action</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     {% for mcustomer in customers %}
                       <tr>
                         <td>{{mcustomer.name}}</td>
                         <td>{{mcustomer.phone}}</td>
                         <td>{{mcustomer.email}}</td>
                         <td>
-                      		<a href="{% url 'customerpage' mcustomer.id %}" class="btn btn-sm btn-info"> <i class="fas fa-eye"></i></a>                        	
+                          <a href="{% url 'customerpage' mcustomer.id %}" class="btn btn-sm btn-info"> <i class="fas fa-eye"></i></a>                         
                           <a href="{% url 'update_customer' mcustomer.id %}" class="btn btn-sm btn-info"> <i class="fas fa-edit"></i></a>                         
                         </td>
                       </tr>
                     {%endfor%}
-                  </thead>
-                  <tbody>
                   </tbody>
               </table> 
               </div>
@@ -68,3 +68,13 @@
 
 
   {%endblock%}
+
+  {%block  js%}
+  <script>
+      $(document).ready( function ()
+        {
+          $('#customerTable').DataTable();
+        } );
+    </script>
+
+{%endblock%}
