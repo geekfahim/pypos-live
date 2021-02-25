@@ -1,5 +1,5 @@
 ## This project is not complete or functionall
-### Currently i'm working on this project but still some parts of this project is working to get a basic idea about the projects.
+### Currently i'm working on this project and this project is not fully functioncal but you can get idea about the projects.
 
 <strong>Technology used</strong>
 
