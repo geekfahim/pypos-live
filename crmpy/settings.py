@@ -1,3 +1,5 @@
+import django_heroku
+
 """
 Django settings for crmpy project.
 
@@ -11,7 +13,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,7 @@ SECRET_KEY = 'z@wl&cj6ytk%3p!kqfsoclvmsdmo3%r3ip9as!v^b_o8+=j%k7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ipypos.herokuapp.com']
+ALLOWED_HOSTS = ['ipypos.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -138,21 +139,8 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
+    os.path.join(BASE_DIR, "static"),
 
+]
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-if os.getcwd() == '/app':
-    import dj_database_url
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
-    #Honor the 'X-forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    #Static asset configuration
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
